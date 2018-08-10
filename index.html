@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>跨域</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            list-style: none;
+        }
+        html,body{
+            height:100%;
+        }
+        .wrapper{
+            width:100%;
+            height:100%;
+            background:#aaa;
+        
+        }
+        .input{
+            position: absolute;
+            top:200px;
+            left:50%;
+            transform: translateX(-50%);
+            width:300px;
+            height:45px;
+            padding:0 10px;
+            /* line-height:45px; */
+            background:#fff;
+            color:#999;
+            border:0;
+            border-radius: 4px;
+            outline: none;
+            font-size: 22px;
+            box-sizing: border-box;
+        }
+        .box{
+            position: absolute;
+            top:245px;
+            left:50%;
+            transform: translateX(-50%);
+            width:300px;
+            margin-top:8px;
+            background:#fff;
+            box-sizing: border-box;
+        }
+        .box li{
+            height:26px;
+            padding:0 10px;
+            line-height:26px;
+            font-size: 18px;
+            cursor: pointer;
+            transition:all ease-in-out 0.1s;
+        }
+        .box li:hover{
+            background:#e0e0e0;
+        }
+        .box li a{
+            display: block;
+            width:100%;
+            height:100%;
+            color: #999;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <input class="input" type="text" placeholder="搜索">
+        <ul class="box"></ul>
+    </div>
+    <script>
+        var oWrapper = document.getElementsByClassName('wrapper')[0],
+            oInput = oWrapper.getElementsByClassName('input')[0],
+            oBox = oWrapper.getElementsByClassName('box')[0];
+
+        oInput.oninput = function(){
+            var val = this.value;
+            var oScript = document.createElement('script');
+            oScript.src  = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='+val+'&cb=cb';
+            document.body.appendChild(oScript);
+        }
+
+
+        function cb(data){
+           var info = data.s;
+           var str = '';
+           info.forEach(function(ele,index){
+               str += '<li><a href="https://www.baidu.com/s?wd='+ele+'">'+ele+'</a></li>';
+           })
+           oBox.innerHTML = str;
+        };
+    </script>
+</body>
+</html>
