@@ -82,10 +82,11 @@
             var oScript = document.createElement('script');
             oScript.src  = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='+val+'&cb=cb';
             document.body.appendChild(oScript);
+            document.body.removeChild(oScript);
         }
 
 
-        function cb(data){
+        function cb(data){ 
            var info = data.s;
            var str = '';
            info.forEach(function(ele,index){
